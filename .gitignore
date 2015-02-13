@@ -1,0 +1,4 @@
+grammar.tab.*
+lex.yy.c
+a.out
+*.example
