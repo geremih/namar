@@ -18,7 +18,7 @@
 
 %%
 
-toplev: expr { *root = $1; YYACCEPT;}
+toplev: expr_list { *root = $1; YYACCEPT;}
         ;
 expr: YINTEGER { $$ = node_int(atoi($1));}
       | YID {$$ = node_id($1);}
