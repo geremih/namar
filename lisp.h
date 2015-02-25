@@ -1,5 +1,10 @@
 #ifndef _LISP_H
 #define _LISP_H
+
+#define IS_NUM(node) ((node)->type == INTEGER)
+#define IS_PAIR(node) ((node)->type == PAIR)
+#define IS_ID(node) ((node)->type == ID)
+
 enum node_type {
         INTEGER, ID, PAIR
 };

@@ -1,4 +1,5 @@
 #include"lisp.h"
+#include"emit.h"
 #include<stdio.h>
 
 extern FILE *yyin;
@@ -8,6 +9,15 @@ int main(){
         do{
                 struct node* root = NULL;
                 yyparse(&root);
-                print_ast(root, 0);
+
+        
+                while(root!=NULL)
+                        {
+                                emit(root->pair->car);
+                                //print_ast(root->pair->car, 0);
+                                root = root->pair->cdr;
+                        }
+
         } while(!feof(yyin));
 }
+
