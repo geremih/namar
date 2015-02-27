@@ -1,6 +1,6 @@
 
 all: lex.yy.c grammar.tab.c main.c lisp.c
-	gcc lex.yy.c grammar.tab.c main.c lisp.c emit.c -lfl -ly -o compile
+	gcc lex.yy.c grammar.tab.c main.c lisp.c emit.c utils.c -lfl -ly -o compile
 
 lex.yy.c: lexer.l grammar.tab.c
 	flex lexer.l

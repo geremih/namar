@@ -1,6 +1,4 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include "lisp.h"
+#include "includes.h"
 
 struct node* node_int(int value){
         struct node* nd = malloc(sizeof(struct node));
@@ -55,3 +53,16 @@ void print_ast(struct node* node, int depth){
 }
 
         
+struct node* nth(struct node* nd, int n){
+        if(!IS_PAIR(nd)){
+                die("Given node is not a pair");
+        }
+        while(n--){
+                nd = nd->pair->cdr;
+                if(!IS_PAIR(nd)){
+                        die("Given node is not a pair");
+                }
+        }
+
+        return nd->pair->car;
+}

@@ -29,4 +29,6 @@ struct node* node_id(char *);
 struct node* node_int(int);
 void print_ast(struct node*, int);
 struct node * node_pair(struct node* car, struct node* cdr);
+
+struct node* nth(struct node*, int);
 #endif
