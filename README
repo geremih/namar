@@ -1,0 +1,37 @@
+# A compiler for a dialect of LISP.
+
+The language is homoiconic, that is the primary representation
+of programs is also a data structure in a primitive type of the language itself
+
+All top-level expressions can be thought be as a list of expressions.
+As the language does not support side-affects as of now, having more
+than one expression in the top-level will lead to only the value of the
+last expression being returned and the values of the other expressions
+being discarded.
+
+Each expression can be [the definitions are in lisp.h]
+a) an integer, identifier - the atoms of the language
+b) or a list - which is formed by consing together atoms and lists.
+
+eg. (cons a b)
+- A cons is represented as a pair in C.
+---------------
+|  a   |  b   |
+---------------
+
+(list a b c) := '(a b c) = (cons a (cons b (cons c nil)))
+
+---------------      ---------------       ---------------
+|  a   |  -   |----> |  b   |      | ----->|  c   |  nil |
+---------------      ---------------       ---------------
+
+As the code is written as an AST, parsing is relatively simple.
+However, a significant power can be achieved with the use of macros,
+which will allow us to represent control structures like that
+required for Assignment 3 without requiring any change to the parser
+itself, but by expanding the control structure into more primitive if statements.
+
+
+# Running the parser
+  make
+  ./compile < test.example
