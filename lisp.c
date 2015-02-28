@@ -85,7 +85,7 @@ int is_boolean(struct node* nd){
         return nd->type == BOOLEAN;
 }
 
-void print(struct node* nd){
+void pprint(struct node* nd){
         if(is_integer(nd)){
                 fprintf(stdout, "%d", nd->integer);
         }
@@ -104,13 +104,13 @@ void print(struct node* nd){
         }
         else if(is_pair(nd)){
                 fprintf(stdout, "(");
-                print(nd->pair->car);
+                pprint(nd->pair->car);
                 if(is_nil(nd->pair->cdr)){
                         fprintf(stdout, ")");
                 }
                 else{
                         fprintf(stdout, " ");
-                        print(nd->pair->cdr);
+                        pprint(nd->pair->cdr);
                 }
         }
         
