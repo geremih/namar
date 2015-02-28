@@ -84,4 +84,34 @@ int is_nil(struct node* nd){
 int is_boolean(struct node* nd){
         return nd->type == BOOLEAN;
 }
+
+void print(struct node* nd){
+        if(is_integer(nd)){
+                fprintf(stdout, "%d", nd->integer);
+        }
+        else if(is_id(nd)){
+                fprintf(stdout, "%s", nd->id);
+        }
+        else if(is_nil(nd)){
+                fprintf(stdout, "nil");
+        }
+        else if(is_boolean(nd)){
+                if(nd->integer)
+                        fprintf(stdout, "true ");
+                else{
+                        fprintf(stdout, "false ");
+                }
+        }
+        else if(is_pair(nd)){
+                fprintf(stdout, "(");
+                print(nd->pair->car);
+                if(is_nil(nd->pair->cdr)){
+                        fprintf(stdout, ")");
+                }
+                else{
+                        fprintf(stdout, " ");
+                        print(nd->pair->cdr);
+                }
+        }
+        
 }
