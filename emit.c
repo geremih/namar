@@ -14,6 +14,7 @@ void emit_expr(struct node *nd){
         else if(is_pair(nd)){
                 //TODO: eval first arg and then call it
                 //How are we planning to implement higher order functions
+                int stack_index = -4;
                 if(!is_id(nth(nd,0))){
                         die("Calling a non-function");
                 }
@@ -21,6 +22,17 @@ void emit_expr(struct node *nd){
                         emit_expr(nth(nd, 1))  ;
                         fprintf(out, "addl $%d, %%eax\n", h_l_integer(1));
                 }
+                if(strcmp(nth(nd, 0)->id, "add") == 0){
+
+                        emit_expr(nth(nd, 1));
+                        fprintf(out, "movl %%eax, %d(%%rbp)\n", stack_index);
+                        emit_expr(nth(nd, 2));
+                        fprintf(out, "movl %d(%%rbp), %%edx\n", stack_index);
+                        fprintf(out, "addl %%edx, %%eax\n");
+                }
+
+
+
         }
 
 
