@@ -66,3 +66,22 @@ struct node* nth(struct node* nd, int n){
 
         return nd->pair->car;
 }
+
+int is_integer(struct node* nd){
+        return nd->type == INTEGER;
+} 
+int is_pair(struct node* nd){
+        return nd->type == PAIR;
+}
+int  is_id(struct node* nd){
+        return nd->type == ID;
+}
+
+int is_nil(struct node* nd){
+        return nd->type == NIL;
+}
+
+int is_boolean(struct node* nd){
+        return nd->type == BOOLEAN;
+}
+}

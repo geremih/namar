@@ -1,12 +1,8 @@
 #ifndef _LISP_H
 #define _LISP_H
 
-#define IS_NUM(node) ((node)->type == INTEGER)
-#define IS_PAIR(node) ((node)->type == PAIR)
-#define IS_ID(node) ((node)->type == ID)
-
 enum node_type {
-        INTEGER, ID, PAIR
+        INTEGER, ID, PAIR, BOOLEAN, NIL
 };
 
 struct node;
@@ -24,6 +20,12 @@ struct node{
         };
 };
 
+
+int is_integer(struct node *);
+int is_pair(struct node *); 
+int is_id(struct node *);
+int is_nil(struct node *);
+int is_boolean(struct node *);
 
 struct node* node_id(char *);
 struct node* node_int(int);
