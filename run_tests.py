@@ -27,6 +27,7 @@ def run():
     no_tests = 0
     failed = 0
     for fi in files:
+        print "Running %s%s%s\n"% (bcolors.OKBLUE, fi, bcolors.ENDC)
         with open(path.join('tests',fi), 'r') as f:
             tests = f.read().rstrip().split('\n\n')
             no_tests += len(tests)
@@ -42,14 +43,15 @@ def run():
                     print "Got %s%s%s\n" % (bcolors.FAIL, got, bcolors.ENDC)
                 else:
                     print "%sPASSED%s %s" % (bcolors.OKGREEN, bcolors.ENDC, code)
-    print ""
+            print ""
+    print "%sResults%s"%(bcolors.OKBLUE, bcolors.ENDC)
     print "Failed %d tests" % failed
     print "Passed %d tests" % (no_tests - failed)
 
     color = bcolors.OKGREEN
     if failed > 0:
         color = bcolors.FAIL
-    print "Ran %s%d%s tests" % (color, no_tests, bcolors.ENDC)
+    print "\nRan %s%d%s tests" % (color, no_tests, bcolors.ENDC)
         
     
 

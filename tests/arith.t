@@ -1,17 +1,5 @@
-7
-7
-
 (inc 1)
 2
-
-nil
-nil
-
-true
-true
-
-false
-false
 
 (add 1 2)
 3
