@@ -14,26 +14,25 @@ class bcolors:
 
 
 def compile_and_execute(code):
-    with open('test.s', 'w') as f:
-        p = Popen('compile', stdout=f, stdin=PIPE, stderr=STDOUT)
-        p.communicate(code)
-    subprocess.call(['gcc', 'test.s', 'runtime.c'])
-    return subprocess.check_output('a.out')
+    p = Popen('./compile', stdout=PIPE, stdin=PIPE, stderr=STDOUT)
+    p.communicate(code)
+    subprocess.call(['make', '-s', 'runtime'])
+    return subprocess.check_output('./runtime')
 
 
 def run():
-    files = listdir('test')
+    files = listdir('tests')
     no_tests = 0
     failed = 0
     for fi in files:
-        with open(path.join('test',fi), 'r') as f:
+        with open(path.join('tests',fi), 'r') as f:
             tests = f.read().rstrip().split('\n\n')
             no_tests += len(tests)
             for test in tests:
                 lines = test.split("\n")
                 code = "\n".join(lines[:-1])
-                expected = lines[-1]
-                got = compile_and_execute(code)
+                expected = lines[-1].rstrip()
+                got = compile_and_execute(code).rstrip()
                 if expected != got:
                     failed += 1
                     print "\n%sFAILED%s %s" % (bcolors.FAIL, bcolors.ENDC, code)
