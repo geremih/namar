@@ -16,7 +16,9 @@ class bcolors:
 def compile_and_execute(code):
     p = Popen('./compile', stdout=PIPE, stdin=PIPE, stderr=STDOUT)
     p.communicate(code)
-    subprocess.call(['make', '-s', 'runtime'])
+    #-B switch to force it to run, some wierd race condition
+    #is happening
+    subprocess.call(['make', '-B', '-s', 'runtime'])
     return subprocess.check_output('./runtime')
 
 

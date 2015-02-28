@@ -9,7 +9,7 @@ lex.yy.c: lexer.l grammar.tab.c
 grammar.tab.c: grammar.y
 	bison -d grammar.y
 
-runtime: runtime.c lisp.c convert.c utils.c  out.s
+runtime: out.s runtime.c lisp.c convert.c utils.c 
 	gcc runtime.c lisp.c convert.c utils.c out.s -o runtime 
 
 test:
