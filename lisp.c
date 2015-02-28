@@ -7,10 +7,10 @@ struct node* node_int(int value){
         return nd;
 }
 
-struct node *node_id(char* str){
+struct node *node_symbol(char* str){
         struct node* nd = malloc(sizeof(struct node));
-        nd->type = ID;
-        nd->id = str;
+        nd->type = SYMBOL;
+        nd->symbol = str;
         return nd;
 }
 struct node *node_pair(struct node* car, struct node* cdr){
@@ -56,8 +56,8 @@ void print_ast(struct node* node, int depth){
         else if(node->type == INTEGER){
                 printf("%d", node->integer);
         }
-        else if(node->type == ID){
-                printf("%s", node->id);
+        else if(node->type == SYMBOL){
+                printf("%s", node->symbol);
         }
         else{
                 printf("(");
@@ -95,8 +95,8 @@ int is_integer(struct node* nd){
 int is_pair(struct node* nd){
         return nd->type == PAIR;
 }
-int  is_id(struct node* nd){
-        return nd->type == ID;
+int  is_symbol(struct node* nd){
+        return nd->type == SYMBOL;
 }
 
 int is_nil(struct node* nd){
@@ -111,8 +111,8 @@ void pprint(struct node* nd){
         if(is_integer(nd)){
                 fprintf(stdout, "%d", nd->integer);
         }
-        else if(is_id(nd)){
-                fprintf(stdout, "%s", nd->id);
+        else if(is_symbol(nd)){
+                fprintf(stdout, "%s", nd->symbol);
         }
         else if(is_nil(nd)){
                 fprintf(stdout, "nil");

@@ -2,7 +2,7 @@
 #define _LISP_H
 
 enum node_type {
-        INTEGER, ID, PAIR, BOOLEAN, NIL
+        INTEGER, SYMBOL, PAIR, BOOLEAN, NIL
 };
 
 struct node;
@@ -16,18 +16,18 @@ struct node{
         union {
                 struct pair *pair;
                 int integer;
-                char * id;
+                char * symbol;
         };
 };
 
 
 int is_integer(struct node *);
 int is_pair(struct node *); 
-int is_id(struct node *);
+int is_symbol(struct node *);
 int is_nil(struct node *);
 int is_boolean(struct node *);
 
-struct node* node_id(char *);
+struct node* node_symbol(char *);
 struct node* node_int(int);
 struct node* node_false();
 struct node* node_true();

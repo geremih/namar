@@ -13,7 +13,7 @@ ID [a-zA-Z]+
 nil     { return YNIL; }
 false   { return YFALSE; }
 true    { return YTRUE; }
-{ID}    {  yylval.sval = strdup(yytext);  return YID;}
+{ID}    {  yylval.sval = strdup(yytext);  return YSYMBOL;}
 {INTEGER} {  yylval.sval = strdup(yytext); return YINTEGER;}
 %%
 

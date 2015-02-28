@@ -15,14 +15,14 @@ void emit_expr(struct node *nd){
                 //TODO: eval first arg and then call it
                 //How are we planning to implement higher order functions
                 int stack_index = -4;
-                if(!is_id(nth(nd,0))){
+                if(!is_symbol(nth(nd,0))){
                         die("Calling a non-function");
                 }
-                if(strcmp(nth(nd, 0)->id, "inc") == 0){
+                if(strcmp(nth(nd, 0)->symbol, "inc") == 0){
                         emit_expr(nth(nd, 1))  ;
                         fprintf(out, "addl $%d, %%eax\n", h_l_integer(1));
                 }
-                if(strcmp(nth(nd, 0)->id, "add") == 0){
+                if(strcmp(nth(nd, 0)->symbol, "add") == 0){
 
                         emit_expr(nth(nd, 1));
                         fprintf(out, "movl %%eax, %d(%%rbp)\n", stack_index);

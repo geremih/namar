@@ -9,7 +9,7 @@
  struct node* nval;
 }
 
-%token <sval> YID
+%token <sval> YSYMBOL
 %token <sval> YINTEGER
 %token YOPEN_PAREN
 %token YCLOSE_PAREN
@@ -24,7 +24,7 @@
 toplev: expr_list { *root = $1; YYACCEPT;}
         ;
 expr: YINTEGER { $$ = node_int(atoi($1));}
-      | YID {$$ = node_id($1);}
+      | YSYMBOL {$$ = node_symbol($1);}
       | YTRUE {$$ = node_true();}
       | YFALSE {$$ = node_false();}
       | YNIL  {$$ = node_nil();}
