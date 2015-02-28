@@ -33,6 +33,6 @@ expr: YINTEGER { $$ = node_int(atoi($1));}
 list: YOPEN_PAREN expr_list YCLOSE_PAREN  { $$ = $2;}
       ;
 expr_list: expr expr_list { $$ = node_pair($1, $2);}
-           | expr         { $$ = node_pair($1, NULL); }
+           | expr         { $$ = node_pair($1, node_nil()); }
            ;
 %%

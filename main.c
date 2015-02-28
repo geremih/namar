@@ -11,7 +11,7 @@ int main(){
                 yyparse(&root);
 
         
-                while(root!=NULL)
+                while(!is_nil(root))
                         {
                                 emit(root->pair->car);
                                 //print_ast(root->pair->car, 0);
