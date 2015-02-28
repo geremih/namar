@@ -144,14 +144,17 @@ void pprint(struct node* nd){
         }
         else if(is_pair(nd)){
                 fprintf(stdout, "(");
-                pprint(nd->pair->car);
-                if(is_nil(nd->pair->cdr)){
-                        fprintf(stdout, ")");
+                while(!is_nil(nd)){
+                        pprint(nd->pair->car);
+                        nd = nd->pair->cdr;
+                        if(!is_nil(nd))
+                                fprintf(stdout, " ");
                 }
-                else{
-                        fprintf(stdout, " ");
-                        pprint(nd->pair->cdr);
-                }
+                fprintf(stdout, ")");
+
         }
         
 }
+
+
+
