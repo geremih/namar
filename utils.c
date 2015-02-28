@@ -1,6 +1,6 @@
 #include "includes.h"
 
 void die(char *msg){
-        fprintf(stderr, msg);
+        fputs(msg, stderr);
         exit(1);
 }
