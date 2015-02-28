@@ -30,7 +30,9 @@ int h_l_boolean(int i){
         return (i<<boolean_shift) | boolean_tag;
 };
 
-
+int l_h_boolean(int i){
+        return (i>>boolean_shift);
+}
 int h_l_integer(int i){
         return (i << integer_shift) | integer_tag;
 };
@@ -45,3 +47,19 @@ int l_h_integer(int i){
 }
 
 
+struct node* l_h_node(int i){
+        struct node *nd = malloc(sizeof(struct node*));
+
+        if(l_is_nil(i)){
+                nd->type = NIL;
+        }
+        else if(l_is_boolean(i)){
+                nd->type = BOOLEAN;
+                nd->integer = l_h_boolean(i);
+        }
+        else if(l_is_integer(i)){
+                nd->type = INTEGER;
+                nd->integer = l_h_integer(i);
+        }
+        return nd;
+}

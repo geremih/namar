@@ -3,8 +3,15 @@
 */
 
 #include<stdio.h>
+#include "convert.h"
+#include "lisp.h"
+#include<stdlib.h>
+int entry();
+
 
 int main(int argc, char* argv[]){
-        printf("%d", entry());
+        struct node* nd = l_h_node(entry());
+        pprint(nd);
+        free(nd);
         return 0;
 }

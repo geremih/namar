@@ -5,6 +5,12 @@ void emit_expr(struct node *nd){
 
         if(is_integer((nd)))
                 fprintf(out, "movl $%d, %%eax\n", h_l_integer(nd->integer));
+        else if(is_boolean(nd)){
+                fprintf(out, "movl $%d, %%eax\n", h_l_boolean(nd->integer));
+        }
+        else if(is_nil(nd)){
+                fprintf(out, "movl $%d, %%eax\n", h_l_nil());
+        }
         else if(is_pair(nd)){
                 //TODO: eval first arg and then call it
                 //How are we planning to implement higher order functions
@@ -13,9 +19,10 @@ void emit_expr(struct node *nd){
                 }
                 if(strcmp(nth(nd, 0)->id, "inc") == 0){
                         emit_expr(nth(nd, 1))  ;
-                        fprintf(out, "addl $1, %%eax\n");
+                        fprintf(out, "addl $%d, %%eax\n", h_l_integer(1));
                 }
         }
+
 
 }
 
@@ -29,5 +36,6 @@ void emit(struct node* nd){
         fprintf(out, "entry:\n");
         emit_expr(nd);
         fprintf(out, "ret\n");
+        fclose(out);
         
 }

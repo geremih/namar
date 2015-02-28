@@ -23,6 +23,28 @@ struct node *node_pair(struct node* car, struct node* cdr){
         return node;
 }
 
+struct node* node_nil(){
+        struct node* nd = malloc(sizeof(struct node));
+        nd->type = NIL;
+        return nd;
+}
+
+struct node* node_true(){
+        struct node* nd = malloc(sizeof(struct node));
+        nd->type = BOOLEAN;
+        nd->integer = 1;
+        return nd;
+}
+
+struct node* node_false(){
+        struct node* nd = malloc(sizeof(struct node));
+        nd->type = BOOLEAN;
+        nd->integer = 0;
+        return nd;
+}
+
+
+
 void print_ast(struct node* node, int depth){
         int i;
         for(i=0;i<depth;i++){
@@ -54,12 +76,12 @@ void print_ast(struct node* node, int depth){
 
         
 struct node* nth(struct node* nd, int n){
-        if(!IS_PAIR(nd)){
+        if(!is_pair(nd)){
                 die("Given node is not a pair");
         }
         while(n--){
                 nd = nd->pair->cdr;
-                if(!IS_PAIR(nd)){
+                if(!is_pair(nd)){
                         die("Given node is not a pair");
                 }
         }

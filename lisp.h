@@ -29,6 +29,12 @@ int is_boolean(struct node *);
 
 struct node* node_id(char *);
 struct node* node_int(int);
+struct node* node_false();
+struct node* node_true();
+struct node* node_nil();
+
+
+
 void print_ast(struct node*, int);
 void pprint(struct node*);
 struct node * node_pair(struct node* car, struct node* cdr);
