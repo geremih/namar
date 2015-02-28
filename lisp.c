@@ -89,6 +89,24 @@ struct node* nth(struct node* nd, int n){
         return nd->pair->car;
 }
 
+int len(struct node* nd){
+
+        if(!is_pair(nd)){
+                die("Given node is not a pair");
+        }
+        int length = 0;
+        while(!is_nil(nd)){
+                nd = nd->pair->cdr;
+                length++;
+                if(!is_pair(nd)){
+                        die("Given node is not a pair");
+                }
+        }
+
+        return length;
+        
+}
+
 int is_integer(struct node* nd){
         return nd->type == INTEGER;
 } 

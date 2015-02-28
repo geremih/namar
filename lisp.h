@@ -38,5 +38,8 @@ struct node* node_nil();
 void print_ast(struct node*, int);
 void pprint(struct node*);
 struct node * node_pair(struct node* car, struct node* cdr);
+
+
 struct node* nth(struct node*, int);
+int len(struct node*);
 #endif
