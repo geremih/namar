@@ -71,9 +71,13 @@ void emit_expr(struct node *nd, struct env* env, int stack_index){
                         struct node *altern = nth(nd, 3);
                         
                         emit_expr(test, env, stack_index);
+                        fprintf(out, "cmpl $%d, %%eax\n", h_l_boolean(1));
+                        fprintf(out, "je %s\n", label1);
                         emit_expr(altern, env, stack_index);
-
-
+                        fprintf(out, "jmp %s\n", label2);
+                        fprintf(out, "%s:\n", label1);
+                        emit_expr(conseq, env, stack_index);
+                        fprintf(out, "%s:\n", label2);
                         free(label1);
                         free(label2);
                 }
