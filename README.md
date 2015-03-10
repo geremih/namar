@@ -1,5 +1,5 @@
 # Namar 
-A crazy and whacky Lisp compiler.
+A whacky and impulsive Lisp compiler.
 
 
 ## Implementation
@@ -9,9 +9,9 @@ than one expression in the top-level will lead to only the value of the
 last expression being returned and the values of the other expressions
 being discarded.
 
-Each expression can be [the definitions are in lisp.h]
-a) an integer, identifier - the atoms of the language
-b) or a list - which is formed by consing together atoms and lists.  
+Each expression can be [the definitions are in lisp.h]  
+1. an integer, identifier - the atoms of the language
+2. or a list - which is formed by consing together atoms and lists.  
 
 eg. (cons a b)  
 A cons is represented as a pair in C.
@@ -32,6 +32,6 @@ A cons is represented as a pair in C.
 
 
 
-## Running the tests
-  make test
+## Running tests
+`  make test`
 
