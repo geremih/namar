@@ -1,7 +1,7 @@
 .PHONY : clean test
 
 compile: lex.yy.c grammar.tab.c main.c lisp.c emit.c utils.c convert.c env.c
-	gcc lex.yy.c grammar.tab.c main.c lisp.c emit.c utils.c convert.c env.c -lfl -ly -o compile
+	gcc -g lex.yy.c grammar.tab.c main.c lisp.c emit.c utils.c convert.c env.c -lfl -ly -o compile
 
 lex.yy.c: lexer.l grammar.tab.c
 	flex lexer.l

@@ -126,6 +126,7 @@ int is_boolean(struct node* nd){
 }
 
 void pprint(struct node* nd){
+        fflush(stdout);
         if(is_integer(nd)){
                 fprintf(stdout, "%d", nd->integer);
         }
