@@ -7,13 +7,13 @@ struct node* node_int(int value){
         return nd;
 }
 
-struct node *node_symbol(char* str){
+struct node* node_symbol(char* str){
         struct node* nd = malloc(sizeof(struct node));
         nd->type = SYMBOL;
         nd->symbol = str;
         return nd;
 }
-struct node *node_pair(struct node* car, struct node* cdr){
+struct node* node_pair(struct node* car, struct node* cdr){
         struct pair *pair = malloc(sizeof(struct pair));
         struct node *node = malloc(sizeof(struct node));
         node->type = PAIR;
