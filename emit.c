@@ -36,12 +36,15 @@ void emit_expr(struct node *nd, struct env* env, int stack_index){
                         fprintf(out, "addl $%d, %%eax\n", h_l_integer(1));
                 }
                 if(strcmp(nth(nd, 0)->symbol, "add") == 0){
-
+                        
                         emit_expr(nth(nd, 1), env, stack_index);
-                        fprintf(out, "movl %%eax, %d(%%rbp)\n", stack_index);
-                        emit_expr(nth(nd, 2), env, stack_index);
-                        fprintf(out, "movl %d(%%rbp), %%edx\n", stack_index);
-                        fprintf(out, "addl %%edx, %%eax\n");
+                        int i;
+                        for(i=2; i< len(nd); i++){
+                                fprintf(out, "movl %%eax, %d(%%rbp)\n", stack_index);
+                                emit_expr(nth(nd, i), env, stack_index);
+                                fprintf(out, "movl %d(%%rbp), %%edx\n", stack_index);
+                                fprintf(out, "addl %%edx, %%eax\n");
+                        }
                 }
                 if(strcmp(nth(nd, 0)->symbol, "grt") == 0){
                         char *label1, *label2;
