@@ -11,7 +11,7 @@ char *unique_label(){
         asprintf(&s,"l%d", count);
         return s;
 }
-
+void emit_var_arg_expr(struct node *nd, struct env* env, int stack_index, char* operator);
 void emit_expr(struct node *nd, struct env* env, int stack_index){
         if(is_integer((nd)))
                 fprintf(out, "movl $%d, %%eax\n", h_l_integer(nd->integer));
@@ -36,15 +36,7 @@ void emit_expr(struct node *nd, struct env* env, int stack_index){
                         fprintf(out, "addl $%d, %%eax\n", h_l_integer(1));
                 }
                 if(strcmp(nth(nd, 0)->symbol, "add") == 0){
-                        
-                        emit_expr(nth(nd, 1), env, stack_index);
-                        int i;
-                        for(i=2; i< len(nd); i++){
-                                fprintf(out, "movl %%eax, %d(%%rbp)\n", stack_index);
-                                emit_expr(nth(nd, i), env, stack_index);
-                                fprintf(out, "movl %d(%%rbp), %%edx\n", stack_index);
-                                fprintf(out, "addl %%edx, %%eax\n");
-                        }
+                        emit_var_arg_expr(nd, env, stack_index, "addl");
                 }
                 if(strcmp(nth(nd, 0)->symbol, "grt") == 0){
                         char *label1, *label2;
@@ -149,6 +141,19 @@ void emit_expr(struct node *nd, struct env* env, int stack_index){
 
 }
 
+void emit_var_arg_expr(struct node *nd, struct env* env, int stack_index, char* operator){
+        emit_expr(nth(nd, 1), env, stack_index);
+        int i;
+        
+        for(i=2; i< len(nd); i++){
+                fprintf(out, "movl %%eax, %d(%%rbp)\n", stack_index);
+                emit_expr(nth(nd, i), env, stack_index);
+                fprintf(out, "movl %d(%%rbp), %%edx\n", stack_index);
+                fprintf(out, "%s %%edx, %%eax\n", operator);
+        }
+
+        
+}
 
 void emit(struct node* nd){
         if(!out){
