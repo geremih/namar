@@ -77,12 +77,15 @@ void print_ast(struct node* node, int depth){
         
 struct node* nth(struct node* nd, int n){
         if(!is_pair(nd)){
+
                 die("Given node is not a pair");
+                pprint(nd);
         }
         while(n--){
                 nd = nd->pair->cdr;
                 if(!is_pair(nd)){
                         die("Given node is not a pair");
+                        pprint(nd);
                 }
         }
 
@@ -98,6 +101,7 @@ int len(struct node* nd){
         while(!is_nil(nd)){
                 if(!is_pair(nd)){
                         die("Given node is not a pair");
+                        pprint(nd);
                 }
                 nd = nd->pair->cdr;
                 length++;
@@ -186,7 +190,7 @@ void pprint(struct node* nd){
                 fprintf(stdout, ")");
 
         }
-        
+        fflush(stdout);
 }
 
 
