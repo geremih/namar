@@ -122,6 +122,26 @@ void emit_expr(struct node *nd, struct env* env, int stack_index){
                         emit_expr(nth(nd, 2), env, stack_index);
                         env = remove_env(env);
                 }
+
+
+                if(strcmp(nth(nd, 0)->symbol, "cond") == 0){
+                        pprint(nd);
+                        struct node* expressions = rest(nd);
+                        int length = len(expressions);
+                        printf("The lenght is %d", length);
+                        int i;
+                        struct node* rem = node_nil();
+                        for(i = length-1; i >= 0; i--) {
+                                struct node* expr = nth(expressions, i);
+                                printf("\n");
+                                pprint(expr);
+                                rem = list(4, node_symbol("if"), first(expr), first(rest(expr)), rem);
+                                
+                        }
+                        nd = rem;
+                        pprint(nd);
+                        emit_expr(nd, env, stack_index);
+                }
                 if(strcmp(nth(nd, 0)->symbol, "ifmod") == 0){
                         /*
                           (ifmod ((event1) (event2) (event3))
