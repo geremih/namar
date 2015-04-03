@@ -96,6 +96,7 @@ void emit_expr(struct node *nd, struct env* env, int stack_index){
                         emit_expr(mac, env, stack_index);
                 }
 
+                
                 if(strcmp(nth(nd, 0)->symbol, "let") == 0){
                         //(let ((a 1) (b 2)))
                         env = add_env(env);
@@ -170,8 +171,7 @@ void emit_expr(struct node *nd, struct env* env, int stack_index){
                         struct node *nil_node = malloc(sizeof(struct node));
                         nil_node->type = NIL;
                         temp->pair->cdr = node_pair(node_pair(cond_node, temp->pair->cdr), nil_node) ;
-                        pprint(nd);
-                        
+                        emit_expr(nd, env, stack_index);
                         
                 }
 
