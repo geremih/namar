@@ -10,7 +10,7 @@ struct node* node_int(int value){
 struct node* node_symbol(char* str){
         struct node* nd = malloc(sizeof(struct node));
         nd->type = SYMBOL;
-        nd->symbol = str;
+        nd->symbol = strdup(str);
         return nd;
 }
 struct node* node_pair(struct node* car, struct node* cdr){
