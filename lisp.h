@@ -21,13 +21,13 @@ struct node{
 };
 
 
-int is_integer(struct node *);
-int is_pair(struct node *); 
-int is_symbol(struct node *);
-int is_nil(struct node *);
-int is_boolean(struct node *);
+int is_integer(struct node*);
+int is_pair(struct node*); 
+int is_symbol(struct node*);
+int is_nil(struct node*);
+int is_boolean(struct node*);
 
-struct node* node_symbol(char *);
+struct node* node_symbol(char*);
 struct node* node_int(int);
 struct node* node_false();
 struct node* node_true();
@@ -37,7 +37,7 @@ struct node* node_nil();
 
 void print_ast(struct node*, int);
 void pprint(struct node*);
-struct node * node_pair(struct node* car, struct node* cdr);
+struct node* node_pair(struct node* car, struct node* cdr);
 
 
 struct node* nth(struct node*, int);
