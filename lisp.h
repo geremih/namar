@@ -42,4 +42,7 @@ struct node* node_pair(struct node* car, struct node* cdr);
 
 struct node* nth(struct node*, int);
 int len(struct node*);
+struct node* list(int num,...);
+struct node* first(struct node*);
+struct node* rest(struct node*);
 #endif

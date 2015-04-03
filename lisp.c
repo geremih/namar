@@ -107,6 +107,38 @@ int len(struct node* nd){
         
 }
 
+struct node* list(int num,...){
+        va_list valist;
+        int i;
+        va_start(valist, num);
+        struct node* root = node_pair(va_arg(valist, struct node*), node_nil());
+        struct node* temp = root;
+        for(i = 1; i < num; i++) {
+                temp->pair->cdr = node_pair(va_arg(valist, struct node*), node_nil());
+                temp = temp->pair->cdr;
+        }
+        return root;
+}
+
+struct node* first(struct node* nd){
+        if (!is_pair(nd)){
+                die("first: given expression not a list");
+        }
+        return nd->pair->car;
+}
+
+struct node* rest(struct node* nd) {
+        if (!(is_pair(nd) || is_nil(nd))){
+                die("rest: given expression not a list or nil");
+        }
+        if (is_nil(nd)){
+                return nd;
+        }
+        else {
+                return nd->pair->cdr;
+        }
+        
+}
 int is_integer(struct node* nd){
         return nd->type == INTEGER;
 } 
