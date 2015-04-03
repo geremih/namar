@@ -108,6 +108,38 @@ void emit_expr(struct node *nd, struct env* env, int stack_index){
                         emit_expr(nth(nd, 2), env, stack_index);
                         env = remove_env(env);
                 }
+                if(strcmp(nth(nd, 0)->symbol, "ifmod") == 0){
+                        /*
+                          (ifmod ((event1) (event2) (event3))
+                                 (then-expr)
+                                 ((event1) statment)
+                          )
+
+                         */
+                        if(len(nd) < 4)  {
+                                die("ifmod: less than 4 arguments supplied");
+                        }
+                        free(nth(nd, 0)->symbol);
+                        nth(nd,0)->symbol = strdup("if");
+                        struct node *event_list = nth(nd, 1);
+                        struct node *or_node = malloc(sizeof(struct node)); 
+                        or_node->symbol = strdup("or");
+                        or_node->type = SYMBOL;
+                        event_list = node_pair(or_node, event_list);
+                        struct node* temp;
+                        temp = nd->pair->cdr; //2nd
+                        temp->pair->car = event_list;
+                        temp = temp->pair->cdr; //3th
+                        struct node *cond_node = malloc(sizeof(struct node));
+                        cond_node->symbol = strdup("cond");
+                        cond_node->type = SYMBOL;
+                        struct node *nil_node = malloc(sizeof(struct node));
+                        nil_node->type = NIL;
+                        temp->pair->cdr = node_pair(node_pair(cond_node, temp->pair->cdr), nil_node) ;
+                        pprint(nd);
+                        
+                        
+                }
 
         }
 
