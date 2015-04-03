@@ -12,3 +12,12 @@ true
     (add 1 2)
     (add 2 3))
 5
+
+(or true false)
+true
+
+(or (grt 1 2) (grt 2 3) (grt 4 5))
+false
+
+(or (grt 1 2) (grt 2 3) (grt 5 4))
+true

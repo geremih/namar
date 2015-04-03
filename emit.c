@@ -77,6 +77,25 @@ void emit_expr(struct node *nd, struct env* env, int stack_index){
                         free(label2);
                 }
 
+                if(strcmp(nth(nd, 0)->symbol, "or") == 0){
+                        int length = len(nd);
+                        if(length < 3) {
+                                die("or: takes 2 or more arguments");
+                        }
+                        struct node* e1 = nth(nd, 1);
+                        struct node* r = rest(rest(nd));
+                        struct node* mac;
+                        if (length == 3) {
+                                mac = list(4, node_symbol("if"), first(r), node_true(), list(4, node_symbol("if"), e1, node_true(), node_false()));
+                        }
+                        else {
+                                
+                        
+                                mac = list(4, node_symbol("if"), node_pair(node_symbol("or"), r), node_true(), list(4, node_symbol("if"), e1, node_true(), node_false()));
+                        }
+                        emit_expr(mac, env, stack_index);
+                }
+
                 if(strcmp(nth(nd, 0)->symbol, "let") == 0){
                         //(let ((a 1) (b 2)))
                         env = add_env(env);
